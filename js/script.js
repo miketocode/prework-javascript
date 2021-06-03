@@ -1,11 +1,13 @@
-function printMessage(msg){
-	var div = document.createElement('div');
-	div.innerHTML = msg;
-	document.getElementById('messages').appendChild(div);
-}
+var argButtonName, buttonPaper, buttonRock, buttonScissors;
 
 function clearMessages(){
 	document.getElementById('messages').innerHTML = '';
+}
+
+function printMessage(msg){
+	const div = document.createElement('div');
+	div.innerHTML = msg;
+	document.getElementById('messages').appendChild(div);
 }
 
 function getMoveName(argMoveId) {
@@ -25,11 +27,11 @@ function getMoveName(argMoveId) {
 function displayResult(argPlayerMove, argComputerMove) {
   console.log('wywołano funkcję displayResults z argumentami: ' + argPlayerMove + ', ' + argComputerMove);
   if (argPlayerMove == 'papier' && argComputerMove == 'kamień') {
-    printMessage('Wygrywasz!');
+    printMessage('Wygrana');
   } else if (argPlayerMove == 'kamień' && argComputerMove == 'nożyce') {
-    printMessage('Wygrywasz!');
+    printMessage('Wygrana');
   } else if (argPlayerMove == 'nożyce' && argComputerMove == 'papier') {
-    printMessage('Wygrywasz!');
+    printMessage('Wygrana');
   } else if (argPlayerMove == argComputerMove) {
     printMessage('Remis');
   } else {
@@ -38,20 +40,26 @@ function displayResult(argPlayerMove, argComputerMove) {
   printMessage('Program zagrał ' + argComputerMove + ', a Gracz ' + argPlayerMove);
 }
 
+var playerInput, playerMove;
+
+
 function buttonClicked(argButtonName) {
   clearMessages();
+  
 
   const playerMove = argButtonName;
-  const randomNumber = Math.floor(Math.random() * 3 + 1);
+  let randomNumber = Math.floor(Math.random() * 3 + 1);
   console.log('wylosowana liczba to: ' + randomNumber);
-  const computerMove = getMoveName(randomNumber);
+  let computerMove = getMoveName(randomNumber);
   console.log('ruch komputera to: ' + computerMove);
   displayResult(playerMove, computerMove);
 }
 
 buttonRock = document.getElementById('button-rock');
 buttonRock.addEventListener('click', function(){ buttonClicked('kamień'); });
+
 buttonPaper = document.getElementById('button-paper');
 buttonPaper.addEventListener('click', function(){ buttonClicked('papier'); });
+
 buttonScissors = document.getElementById('button-scissors');
 buttonScissors.addEventListener('click', function(){ buttonClicked('nożyce'); });
